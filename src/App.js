@@ -1,26 +1,44 @@
-import logo from './logo.svg';
-import './App.css';
-import ContadorDeCliques from './Components/ContadorDeCliques';
-import React from 'react'
-function App() {
-  const [quantidade,setQuantidade] = React.useState(0);
-  return (
-    <div className="App">
-      <h2>Welcome to React</h2>
-      <ContadorDeCliques
-        textoDescritivo="Quantidade de cliques acima"
-        textoBotao="Botão superior"
-        quantidade={quantidade}
-        setQuantidade={setQuantidade}
-      />
-      <ContadorDeCliques
-        textoDescritivo="Quantidade de cliques abaixo"
-        textoBotao="Botão inferior"
-        quantidade={quantidade}
-        setQuantidade={setQuantidade}
-      />
-    </div>
-  );
+import React,{useState} from 'react'
+import {ThemeProvider, createTheme} from '@mui/material/styles';
+import { AppBar,Tabs,Tab,Box } from '@mui/material';
+
+import './App.css'
+import Configuration from './Containers/Configuration';
+import ItemForm from './Containers/ItemForm';
+import ItemList from './Containers/ItemList';
+
+const theme = createTheme({
+  palette: {
+    primary: {
+      main: "#478BC9",
+    },
+    secondary: {
+      main: "#80F1D3",
+    },
+  },
+});
+
+function App(){
+  const [selectedTab,selectTab] = useState(0)
+  function handleTabSelection(event,newValue){
+    selectTab(newValue);
+  }
+  return <div className="app">
+    <ThemeProvider theme={theme}>
+      <AppBar position="static">
+        <Tabs value={selectedTab} onChange={handleTabSelection}>
+          <Tab label="Configuração"/>
+          <Tab label="Novo Item"/>
+          <Tab label="Itens"/>
+        </Tabs>
+      </AppBar>
+      <Box p={3}>
+        {selectedTab == 0 ? <Configuration/> : null}
+        {selectedTab == 1 ? <ItemForm/> : null}
+        {selectedTab == 2 ? <ItemList/> : null}
+      </Box>
+    </ThemeProvider>
+  </div>
 }
 
-export default App;
+export default App
