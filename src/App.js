@@ -1,4 +1,4 @@
-import logo from './logo.svg';
+
 import './App.css';
 import ContadorDeCliques from './Components/ContadorDeCliques';
 import React from 'react'
