@@ -1,41 +1,55 @@
-import {Grid, TextField, Button} from '@mui/material'
+import {Grid, Button} from '@mui/material'
 import React,{useState} from 'react'
+import {Form,Field} from 'react-final-form'
+import Input from '../Components/Input'
 function ItemForm(props){
-    
-    const [descricao,setDescricao] = useState("");
-    const [codigo,setCodigo] = useState("");
-    const list = props.list
-    function salvarItem(){
+    /*
+    const [formState,setFormState] = useState({descricao: "",codigo:""})
+ 
+    const setDescricao = value => setFormState(formState=>({...formState, descricao:value}))
+    const setCodigo = value => setFormState(formState=>({...formState,codigo:value}))*/
+   
+    const salvarItem = formValues =>{
+        props.setList([...props.list,{id:props.id,codigo:formValues.codigo,descricao: formValues.descricao}])
         
-        props.setList([...props.list,{id:props.id,codigo,descricao}])
-        setCodigo("");
-        setDescricao("");
         props.setId(props.id+1)
     }
-    return <Grid container spacing={3}>
-        
-        <Grid item xs={12}>
-            <TextField
-                fullWidth
-                label="Código"
-                value={codigo}
-                onChange={ev=>setCodigo(ev.target.value)}
-            >
-            </TextField>
-        </Grid>
-        <Grid item xs={12}>
-            <TextField
-                fullWidth
-                label="Descrição"
-                value={descricao}
-                onChange={ev=>setDescricao(ev.target.value)}
-            >
-            </TextField>
-        </Grid>
-        <Grid item xs>
-            <Button variant="contained" onClick={salvarItem}>Salvar</Button>
-        </Grid>
+    const validate = formValues=>{
+        const error={}
+        if(!formValues.codigo){
+            error.codigo="Código é obrigatório"
+        }
+        if(!formValues.descricao){
+            error.descricao="Descrição é obrigatório"
+        }
+        return error;
+    }
 
-    </Grid>
+    const initialValues ={codigo:"xxxxxx",descricao:"xxxxxx"}
+    return (
+      
+            <Form onSubmit={salvarItem} validate={validate} initialValues={initialValues}>
+                {formProps => (
+                    <form onSubmit={formProps.handleSubmit}>
+                        <Grid container spacing={3}>
+                        <Grid item xs={3}>
+                            <Field  name="codigo" nomeLabel="Código" component={Input}/>
+                                
+                        
+                        </Grid>
+                        <Grid item xs={8}>
+                            <Field  name="descricao" nomeLabel="Descrição" component={Input}/>
+                        
+                        </Grid>
+                        <Grid item xs>
+                            <Button variant="contained" type="submit" >Salvar</Button>
+                        </Grid>
+                        </Grid>
+                    </form>
+                )}
+                
+            </Form>
+    )
+       
 }
 export default ItemForm;
