@@ -13,7 +13,7 @@ function Configuration(){
     const setReceberNotificacoes = value =>setFormState(formState => ({...formState, receberNotificacoes: value}))*/
 
     const onSubmit = formValues =>{
-        alert("Usuario: "+formValues.usuario+" Email: "+formValues.email+(formValues.receberNotificacoes ? "Receber notificações":"Não receber notificações"))
+        alert("Usuario: "+formValues.usuario+" Email: "+formValues.email+(formValues.receberNotificacao ? "Receber notificações":"Não receber notificações"))
     }
 
     const validate = formValues=>{
