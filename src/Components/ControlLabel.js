@@ -12,7 +12,7 @@ function ControlLabel(props){
                 checked={value}
                 onChange={onChange}
                 />}
-                label="Receber notificações"
+                label={props.nomeLabel}
             />
             {shoudShowError && errorMessage}
         

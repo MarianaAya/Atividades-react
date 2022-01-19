@@ -42,7 +42,7 @@ function Configuration(){
                             <Field name="email" nomeLabel="Email" component={Input}/>
                         </Grid>
                         <Grid item >
-                            <Field name="receberNotificacao" component={ControlLabel}/>
+                            <Field name="receberNotificacao" nomeLabel="Receber noticação" component={ControlLabel}/>
                             
                         </Grid>
                         <Grid item xs={12}>

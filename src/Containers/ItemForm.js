@@ -1,7 +1,10 @@
 import {Grid, Button} from '@mui/material'
+import api from '../Services/api'
 import React,{useState} from 'react'
 import {Form,Field} from 'react-final-form'
 import Input from '../Components/Input'
+import ControlLabel from '../Components/ControlLabel'
+
 function ItemForm(props){
     /*
     const [formState,setFormState] = useState({descricao: "",codigo:""})
@@ -10,7 +13,10 @@ function ItemForm(props){
     const setCodigo = value => setFormState(formState=>({...formState,codigo:value}))*/
    
     const salvarItem = formValues =>{
-        props.setList([...props.list,{id:props.id,codigo:formValues.codigo,descricao: formValues.descricao}])
+       
+        return api.createItem(formValues)
+            .then(()=>alert('Salvo com sucesso'))
+            .catch(err=>alert(`Erro: ${err.message}`))
         
         props.setId(props.id+1)
     }
@@ -40,6 +46,10 @@ function ItemForm(props){
                         <Grid item xs={8}>
                             <Field  name="descricao" nomeLabel="Descrição" component={Input}/>
                         
+                        </Grid>
+                        <Grid item >
+                            <Field name="ativo" nomeLabel="Ativo" component={ControlLabel}/>
+                            
                         </Grid>
                         <Grid item xs>
                             <Button variant="contained" type="submit" >Salvar</Button>
