@@ -31,7 +31,7 @@ function ItemForm(props){
         return error;
     }
 
-    const initialValues ={codigo:"xxxxxx",descricao:"xxxxxx"}
+    const initialValues ={codigo:"xxxxxx",descricao:"xxxxxx",ativo:false}
     return (
       
             <Form onSubmit={salvarItem} validate={validate} initialValues={initialValues}>

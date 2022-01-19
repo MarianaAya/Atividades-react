@@ -30,7 +30,7 @@ function Configuration(){
         
         
           
-            <Form onSubmit={onSubmit} validate={validate}>
+            <Form onSubmit={onSubmit} validate={validate} >
                 
                 {formProps =>(
                     <form onSubmit={formProps.handleSubmit}>
